@@ -1,0 +1,76 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+
+  color-scheme: light dark;
+
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: #000;
+  color: #fff;
+}
+
+ul {
+  font-size: 1.6rem;
+}
+
+
+
+li:hover {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  font-size: 1.6rem;
+  color: #fff;
+  font-weight: 500;
+}
+
+button,
+a {
+  font-size: 1.4rem;
+  font-weight: 500;
+  padding: 0.8rem 2.4rem;
+  outline: 0;
+  border: none;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.icon {
+  font-size: 1rem;
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+@media (prefers-color-scheme: light) {}

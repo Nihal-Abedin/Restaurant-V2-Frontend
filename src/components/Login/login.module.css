@@ -1,0 +1,27 @@
+.formContainer {
+    background-color: #141414;
+    padding: 2rem;
+    width: 50%;
+    border-radius: 1rem;
+    transition: all 0.2s ease-in;
+}
+
+.formContainer:hover {
+    box-shadow: rgb(43, 10, 190) 0px 3px 8px;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.loginForm h1 {
+    margin-bottom: 1rem;
+}
+
+.loginForm div {
+    width: 100%;
+    color: #fff;
+}

@@ -1,0 +1,113 @@
+.menuItems .nestedChildContainer {
+    position: relative;
+    transition: all 0.2s ease;
+
+
+}
+
+
+.menuHeader {
+    font-size: 1.6rem;
+    padding: 1.2rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    border: 0.01rem solid #002a4d;
+    border-radius: 1rem;
+    /* background-color: red; */
+}
+
+.menuHeader:hover {
+    box-shadow: #002a4d 0px 1px 4px;
+    ;
+    /* background-color: red; */
+}
+
+.nestedChildHeader {
+    font-size: 1.6rem;
+    padding: 1.2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 1px solid rgb(61, 168, 255);
+    border-radius: 1rem;
+
+
+}
+
+.title {
+    display: flex;
+    gap: 1rem;
+}
+
+.menuList {
+    margin-bottom: 2rem;
+    border-radius: 0.2rem 0.2rem 0 0;
+
+    /* border-bottom: 1px solid #3fa9ff; */
+
+    /* background-color: red; */
+}
+
+.childList {
+    background-color: rgb(44, 44, 44);
+    padding: 1.2rem 3rem;
+    border-bottom: 1px solid #3fa9ff;
+    border-radius: 0.5rem 0.5rem 0.3rem 0.3rem;
+
+
+}
+
+.childList:hover {
+    background-color: rgb(68, 68, 68);
+}
+
+.nestedChildContainer {}
+
+/* 
+
+.menuChildren h1:hover {
+    background-color: rgb(68, 68, 68);
+
+}
+
+
+
+.menuChildren ul li {
+    background-color: rgb(44, 44, 44);
+    padding: 1rem 1rem 1rem 4rem;
+    transition: all 0.1s ease-in-out;
+    border-bottom: 1px solid rgb(19, 19, 19);
+    border-radius: 1rem;
+    margin: 0.2rem 0;
+
+}
+
+.menuChildren ul li p {
+    margin-left: 2rem;
+}
+
+.menuChildren ul li:hover {
+    background-color: rgb(68, 68, 68);
+
+} */
+
+.hide {
+    position: absolute;
+    width: 100%;
+    top: -100%;
+    display: none;
+}
+
+.show {
+    width: 100%;
+    /* top: 0%; */
+    position: relative;
+    display: block;
+}
+
+.active {
+    background-color: #3fa9ff !important;
+}

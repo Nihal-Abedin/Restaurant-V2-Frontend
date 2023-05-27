@@ -1,0 +1,19 @@
+.default {
+    background: #fff;
+    color: blue;
+}
+
+.default:hover {
+    color: blue;
+}
+
+.primary {
+    background: #3D57FC;
+    font-weight: 600;
+    color: #fff;
+}
+
+.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
