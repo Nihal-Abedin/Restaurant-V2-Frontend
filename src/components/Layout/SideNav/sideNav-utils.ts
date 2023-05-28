@@ -14,7 +14,7 @@ export type itemsArray = itemsObject[];
 
 export const items: itemsArray = [
     {
-        key: "login",
+        key: "authentication",
         lable: "Authentication",
         child: [
             {
@@ -37,16 +37,16 @@ export const items: itemsArray = [
             {
                 key: 'getAllUser',
                 lable: 'GET All User',
-                disable: true
+
 
             },
             {
                 key: 'getUser',
                 lable: "GET User",
-                disable: true
 
-            }
-        ],
+
+            },
+        ], disable: true
     }
 
 ]

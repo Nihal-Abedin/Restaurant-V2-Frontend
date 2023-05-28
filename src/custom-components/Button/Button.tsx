@@ -6,7 +6,7 @@ import Spin from '../Spin/Spin';
 interface Button {
     children?: ReactNode;
     text?: ReactNode | string;
-    htmlType?: 'button' | 'submit' | 'reset' | 'link';
+    htmlType?: 'button' | 'submit' | 'reset';
     onClick?: () => void;
     type?: 'primary' | 'danger' | 'default';
     isLoading?: boolean;
@@ -34,7 +34,7 @@ const Button: React.FC<Button> = ({ onClick, children, disable = false, htmlType
     return <div style={
         disable || isLoading ? { cursor: "not-allowed", width: 'fit-content', ...style } : { width: 'fit-content', ...style }
     }>
-        <button
+        <button type={htmlType}
             className={`${css} ${disable || isLoading ? styles.disabled : ""} `}
             onClick={onClick}>{btnTxt}</button>
     </div>

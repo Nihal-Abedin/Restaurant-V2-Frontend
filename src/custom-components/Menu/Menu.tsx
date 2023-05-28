@@ -12,29 +12,42 @@ interface Prop {
     activeItemKeys?: string[]
 }
 const Menu: React.FC<Prop> = ({ items, openKeys = [], onSelectItem, activeItemKeys = [] }) => {
+    const [tabKey, setTabKey] = useState<string[]>(openKeys)
 
+    const handleTabkey = ({ key }: { key: string }) => {
+        if (tabKey.includes(key)) {
+            const filteredKeys = tabKey.filter(k => k !== key)
+            setTabKey(filteredKeys)
+
+            return
+        }
+        setTabKey(prev => prev.concat(key))
+    }
 
     const getChild = (child: itemsArray) => {
         const test: [any] = [""];
         const r = child.map(ch => {
 
             if (ch.child) {
-                console.log(ch.lable, "HAS CHILD")
                 test.push(<li key={ch.key} className={styles.nestedChildContainer}>
                     <div>
-                        <h1
-                            onClick={() => {
-                                onSelectItem && onSelectItem({ key: ch.key })
+                        <div style={ch.disable ? { cursor: "not-allowed" } : {}}>
 
-                            }}
-                            className={styles.nestedChildHeader}
-                        >
-                            <div className={styles.title}>
-                                {ch.icon && <ch.icon />}<span>{ch.lable}</span></div> <DownOutlined className="icon" />
-                        </h1>
+                            <h1
+                                onClick={() => {
+                                    handleTabkey({ key: ch.key })
+                                    // onSelectItem && onSelectItem({ key: ch.key })
+
+                                }}
+                                className={styles.nestedChildHeader}
+                            >
+                                <div className={styles.title}>
+                                    {ch.icon && <ch.icon />}<span>{ch.lable}</span></div> <DownOutlined className="icon" />
+                            </h1>
+                        </div>
                         <ul key={ch.key}
                             className={
-                                openKeys.includes(ch.key)
+                                tabKey.includes(ch.key)
                                     ? `${styles.show} ${styles.menuList} `
                                     : `${styles.hide} ${styles.menuList}`
                             }
@@ -43,12 +56,12 @@ const Menu: React.FC<Prop> = ({ items, openKeys = [], onSelectItem, activeItemKe
                         </ul>
                     </div>
                 </li>)
+            } else return <div key={ch.key} style={ch.disable ? { cursor: "not-allowed" } : {}}>
+                <li onClick={() => onSelectItem && onSelectItem({ key: ch.key })} className={` ${styles.childList} ${ch.disable ? 'disabled' : ''} ${activeItemKeys.includes(ch.key) ? styles.active : ''}`}>
 
-
-
-            } else return <li style={ch.disable ? { cursor: "not-allowed" } : {}} key={ch.key} onClick={() => onSelectItem && onSelectItem({ key: ch.key })} className={`${styles.childList} ${activeItemKeys.includes(ch.key) ? styles.active : ''}`}>
-                <p className={`${ch.disable ? 'disabled' : ''}`}>{ch.lable}</p>
-            </li>
+                    <p  >{ch.lable}</p>
+                </li>
+            </div>
 
 
         })
@@ -62,8 +75,7 @@ const Menu: React.FC<Prop> = ({ items, openKeys = [], onSelectItem, activeItemKe
                     <div style={item.disable ? { cursor: "not-allowed" } : {}}>
                         <h1
                             onClick={() => {
-                                onSelectItem && onSelectItem({ key: item.key })
-
+                                handleTabkey({ key: item.key })
                             }}
                             className={`${styles.menuHeader} ${item.disable ? 'disabled' : ''}`}
                         >
@@ -71,9 +83,9 @@ const Menu: React.FC<Prop> = ({ items, openKeys = [], onSelectItem, activeItemKe
                             <DownOutlined className="icon" />
                         </h1>
                     </div>
-                    <ul key={item.key}
+                    <ul
                         className={
-                            openKeys.includes(item.key)
+                            tabKey.includes(item.key)
                                 ? `${styles.show} ${styles.menuList}`
                                 : `${styles.hide} ${styles.menuList}`
                         }
