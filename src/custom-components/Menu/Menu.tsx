@@ -26,6 +26,7 @@ const Menu: React.FC<Prop> = ({ items, openKeys = [], onSelectItem, activeItemKe
 
     const getChild = (child: itemsArray) => {
         const test: [any] = [""];
+        console.log(child)
         const r = child.map(ch => {
 
             if (ch.child) {
@@ -56,12 +57,16 @@ const Menu: React.FC<Prop> = ({ items, openKeys = [], onSelectItem, activeItemKe
                         </ul>
                     </div>
                 </li>)
-            } else return <div key={ch.key} style={ch.disable ? { cursor: "not-allowed" } : {}}>
-                <li onClick={() => onSelectItem && onSelectItem({ key: ch.key })} className={` ${styles.childList} ${ch.disable ? 'disabled' : ''} ${activeItemKeys.includes(ch.key) ? styles.active : ''}`}>
+            } else {
+                test.push(<div key={ch.key} style={ch.disable ? { cursor: "not-allowed" } : {}}>
+                    <li onClick={() => onSelectItem && onSelectItem({ key: ch.key })} className={` ${styles.childList} ${ch.disable ? 'disabled' : ''} ${activeItemKeys.includes(ch.key) ? styles.active : ''}`}>
+                        <p>{ch.lable}</p>
+                    </li>
+                </div>)
+            }
 
-                    <p  >{ch.lable}</p>
-                </li>
-            </div>
+
+
 
 
         })
@@ -73,17 +78,18 @@ const Menu: React.FC<Prop> = ({ items, openKeys = [], onSelectItem, activeItemKe
             {items.map((item) => (
                 <div key={item.key} className={`${styles.menuItems} `}>
                     <div style={item.disable ? { cursor: "not-allowed" } : {}}>
-                        <h1
+                        <h1 style={item.child && tabKey.includes(item.key) ? { borderRadius: '1rem 1rem 0 0' } : {}}
                             onClick={() => {
                                 handleTabkey({ key: item.key })
+                                !item.child && onSelectItem && onSelectItem({ key: item.key })
                             }}
-                            className={`${styles.menuHeader} ${item.disable ? 'disabled' : ''}`}
+                            className={`${styles.menuHeader} ${item.disable ? 'disabled' : ''} ${activeItemKeys.includes(item.key) ? styles.active : ''}`}
                         >
                             <div className={styles.title}>{item.icon && <item.icon />}<span>{item.lable}</span></div>
-                            <DownOutlined className="icon" />
+                            {item.child && <DownOutlined className={`icon ${tabKey.includes(item.key) ? styles.rotate : ''}`} />}
                         </h1>
                     </div>
-                    <ul
+                    {item.child && <ul
                         className={
                             tabKey.includes(item.key)
                                 ? `${styles.show} ${styles.menuList}`
@@ -91,7 +97,7 @@ const Menu: React.FC<Prop> = ({ items, openKeys = [], onSelectItem, activeItemKe
                         }
                     >
                         {item.child && getChild(item.child)}
-                    </ul>
+                    </ul>}
                 </div>
 
             ))}

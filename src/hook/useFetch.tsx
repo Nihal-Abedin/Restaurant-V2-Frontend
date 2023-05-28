@@ -1,51 +1,61 @@
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
-
+import instance from "../utils/axiosIntance";
 
 interface optionsType {
     isEnable?: boolean;
     method?: 'GET' | 'POST' | 'PATCH' | 'DELETE';
     retry?: boolean;
     retryDelay?: number;
-    payload?: any | null
 }
 interface ReturnTypes {
-    data: [];
+    data: [] | any;
     error?: string | object | null;
     refetch?: () => void;
     isLoading?: boolean;
+    isSuccess?: boolean;
+    isError?: boolean
 
 }
 
 
-const useFetch = (URL: string, { isEnable = false, method = 'GET', retry = false, retryDelay = 0, payload = null }: optionsType) => {
+const useFetch = (URL: string, { isEnable = false, method = 'GET', retry = false, retryDelay = 0 }: optionsType) => {
     const [returnState, setReturnState] = useState<ReturnTypes>({
         data: [],
         error: null,
         refetch: () => {
             // 
         },
-        isLoading: false
+        isLoading: false,
+        isSuccess: false,
+        isError: false
     })
-    const header = {
-        'Content-Type': 'application/json',
-    }
-    const sendReq = useCallback(async () => {
+    const sendReq = useCallback(async (data?: any) => {
         setReturnState(prev => ({ ...prev, isLoading: true }))
 
         try {
-            const { data: resData } = await axios({
+            const { data: resData } = await instance({
                 method: method,
                 url: URL,
-                data: payload ? payload : null
+                data: data ? data : null
             })
-            setReturnState(prev => ({ ...prev, data: resData }))
+            console.log(resData)
+            setReturnState(prev => ({ ...prev, data: resData, isSuccess: true, isError: false, error: null }))
         } catch (err: any) {
+            console.log(err)
             // console.log(err.response.data, "SADAS")
-            setReturnState(prev => ({ ...prev, error: err.response.data.message }))
+            setReturnState(prev => ({
+                ...prev,
+                error: err.message,
+                isError: true,
+                isSuccess: false,
+            }))
 
         }
-        setReturnState(prev => ({ ...prev, isLoading: false }))
+        setReturnState(prev => ({
+            ...prev,
+            isLoading: false,
+        }))
 
     }, [])
     useEffect(() => {
