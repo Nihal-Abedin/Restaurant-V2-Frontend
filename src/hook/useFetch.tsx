@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import instance from "../utils/axiosIntance";
+import useLogin from "../store/useLoginState";
 
 interface optionsType {
     isEnable?: boolean;
@@ -30,6 +31,7 @@ const useFetch = (URL: string, { isEnable = false, method = 'GET', retry = false
         isSuccess: false,
         isError: false
     })
+    //   const handleModalOpen = useModalStore((state) => state.handleModalOpen);
     const sendReq = useCallback(async (data?: any) => {
         setReturnState(prev => ({ ...prev, isLoading: true }))
 
@@ -39,14 +41,14 @@ const useFetch = (URL: string, { isEnable = false, method = 'GET', retry = false
                 url: URL,
                 data: data ? data : null
             })
-            console.log(resData)
+
             setReturnState(prev => ({ ...prev, data: resData, isSuccess: true, isError: false, error: null }))
         } catch (err: any) {
             console.log(err)
             // console.log(err.response.data, "SADAS")
             setReturnState(prev => ({
                 ...prev,
-                error: err.message,
+                error: err?.message,
                 isError: true,
                 isSuccess: false,
             }))

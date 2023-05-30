@@ -26,7 +26,6 @@ const Menu: React.FC<Prop> = ({ items, openKeys = [], onSelectItem, activeItemKe
 
     const getChild = (child: itemsArray) => {
         const test: [any] = [""];
-        console.log(child)
         const r = child.map(ch => {
 
             if (ch.child) {

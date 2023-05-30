@@ -1,0 +1,44 @@
+.detailContainer {
+    width: 100%;
+}
+
+.detailsHero {
+    height: 50rem;
+    opacity: 0.5;
+    /* overflow: hidden; */
+    /* border: 1px solid red; */
+    /* width: 100%; */
+    /* background: red; */
+    margin-bottom: 2rem;
+}
+
+.defaultHero {
+    /* width: 100%; */
+    height: 100%;
+    box-shadow: rgba(0, 72, 206, 0.4) 0px 1px 0px 0px;
+
+    /* filter: blur(0.1rem); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 7rem;
+
+}
+
+.menuContainer {}
+
+.menuHeader {
+    background-color: rgba(0, 72, 206, 0.2);
+    padding: 2rem;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.listContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}

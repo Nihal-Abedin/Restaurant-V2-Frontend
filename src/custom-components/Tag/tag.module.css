@@ -1,0 +1,9 @@
+.tag {
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    background: rgb(65, 65, 65);
+    color: #fff;
+    border-radius: 1rem;
+    text-align: center;
+
+}

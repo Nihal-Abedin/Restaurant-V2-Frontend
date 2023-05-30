@@ -64,9 +64,45 @@ button:hover {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+*::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5em;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent !important;
+  position: absolute;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background-color: #3fa9ff;
+}
+
 .icon {
   font-size: 1rem;
   transition: all 0.3s ease-in-out;
+}
+
+.floatParentDiv {
+  position: relative;
+}
+
+.floatingButtonDiv {
+  width: 100%;
+  background-color: rgb(0, 0, 161, 0.6);
+  padding: 2rem 1rem;
+  position: absolute;
+  left: 0;
+  /* bottom: 0; */
+  transform: translateY(197%);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.floatParentDiv:hover .floatingButtonDiv {
+  transform: translateY(100%);
+
 }
 
 .disabled {

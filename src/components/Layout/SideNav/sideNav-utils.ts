@@ -1,6 +1,8 @@
 import { ReactNode } from "react"
-import { DownOutlined, LockOutlined } from "@ant-design/icons";
+import { UserOutlined, LockOutlined, HomeOutlined } from "@ant-design/icons";
 import Cookies from "js-cookie";
+
+
 export interface itemsObject {
     key: string,
     lable: string | ReactNode,
@@ -33,6 +35,7 @@ export const items: itemsArray = [
     {
         key: 'user',
         lable: 'User',
+        icon: UserOutlined,
     },
     {
         key: 'restaurants',
@@ -42,7 +45,8 @@ export const items: itemsArray = [
                 key: 'restaurant',
                 lable: 'All Restaurant'
             }
-        ]
+        ],
+        icon: HomeOutlined
     },
     {
         key: 'menu',
