@@ -1,0 +1,65 @@
+.rating {
+    width: 2rem;
+    height: 2rem;
+    background-color: red;
+    border-radius: 50%;
+}
+
+.restaurantCardContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem
+        /* position: relative; */
+}
+
+.menucardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cardInfos {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    /* display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem; */
+
+
+}
+
+.cardInfos p {
+    font-size: 1.6rem;
+}
+
+.cardInfos span {
+    font-size: 1.6rem;
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+}
+
+
+.btnDiv {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.reviews {
+    width: 4rem;
+    height: 4rem;
+    padding: 0 1rem;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: #222;
+    gap: 0.5rem;
+    font-size: 2rem;
+
+}

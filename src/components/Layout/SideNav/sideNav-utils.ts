@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { UserOutlined, LockOutlined, HomeOutlined } from "@ant-design/icons";
+import { UserOutlined, LockOutlined, HomeOutlined, ReadOutlined } from "@ant-design/icons";
 import Cookies from "js-cookie";
 
 
@@ -49,8 +49,16 @@ export const items: itemsArray = [
         icon: HomeOutlined
     },
     {
-        key: 'menu',
+        key: 'allmenu',
         lable: 'Menu',
+        icon: ReadOutlined,
+        child: [
+            {
+                key: 'menu',
+                lable: "All Menu",
+
+            }
+        ]
 
     }
 

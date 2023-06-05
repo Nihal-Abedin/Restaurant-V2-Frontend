@@ -11,21 +11,22 @@ const Restaurant: React.FC = () => {
     const { data, sendReq, error, isError, isLoading, isSuccess } = useFetch(`${import.meta.env.VITE_REACT_APP_BASE_URL}/restaurant/`, {
         method: "GET"
     })
+    console.log(data)
     const handleRouteToResDetails = (id: string) => {
         navigate(`/restaurant/${id}`)
     }
     useEffect(() => {
         sendReq()
     }, [])
-    if (isLoading && !data.data?.data) {
+    if (isLoading && !data) {
         return <Layout>
             <Spin />
         </Layout>
     }
-    console.log(data.data?.data)
+    // console.log(data.data?.data)
     return <Layout>
         <div className={styles.resContainer}>
-            {data.data?.data.map((res: any) => <Restaurantcard key={res.id} resName={res.name} rating={res.average_ratings} menus={res.total_menus} onClick={handleRouteToResDetails.bind(this, res.id)} />)}
+            {data?.data?.data.map((res: any) => <Restaurantcard key={res.id} resName={res.name} rating={res.average_ratings} menus={res.total_menus} onClick={handleRouteToResDetails.bind(this, res.id)} />)}
         </div>
     </Layout>
 };

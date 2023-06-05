@@ -1,0 +1,24 @@
+.inputContainer {
+    border: 1px solid black;
+    padding: 1.6rem;
+    border-radius: 0.8rem;
+    font-size: 1.6rem;
+    width: 100%;
+    display: flex;
+    display: grid;
+    grid-template-columns: auto 100px auto;
+    align-items: center;
+    background: #fff;
+}
+
+
+.actionIcon {
+    font-size: 1.6rem;
+    color: #222;
+}
+
+.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    /* cursor: not-allowed; */
+}

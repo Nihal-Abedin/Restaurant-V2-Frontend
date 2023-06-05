@@ -4,11 +4,11 @@ import { items } from "./sideNav-utils";
 import Menu from "../../../custom-components/Menu/Menu";
 import { useLocation, useNavigate } from "react-router";
 const SideNav: React.FC = () => {
-    const [openKeys, setOpenKeys] = useState<string[]>(["authentication", "restaurants"]);
-    const [activeChild, setActiveChild] = useState<string[]>([]);
+    const [openKeys, setOpenKeys] = useState<string[]>(["authentication", "restaurants", "allmenu"]);
     const navigate = useNavigate();
     const location = useLocation();
     const root = location.pathname.split("/")[1];
+    const [activeChild, setActiveChild] = useState<string[]>([root]);
     useEffect(() => {
         setActiveChild([root || 'login']);
     }, [root]);

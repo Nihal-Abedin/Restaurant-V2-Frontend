@@ -1,0 +1,92 @@
+.selectContent {
+    background: #fff;
+    display: flex;
+    /* flex-direction: column; */
+    /* gap: 1rem; */
+    flex-wrap: wrap;
+    flex-basis: auto;
+    align-items: center;
+    padding: 0 1rem;
+    border-radius: 1rem;
+    position: relative;
+    /* transition: all 0.8s ease-in-out; */
+
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 0.5rem 0;
+
+}
+
+
+
+.inputContainer {
+    /* background: red; */
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+}
+
+.inputContainer input {
+    width: 100%;
+    height: 4rem;
+    border: none;
+    outline: none;
+    border-radius: 1rem;
+    padding: 0 1rem;
+    color: #222;
+}
+
+.selectIcon {
+    font-size: 1.6rem;
+    color: #222;
+    cursor: pointer;
+}
+
+.optionsContainer {
+    background: #e2e2e2;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 100%;
+    /* bottom: -20%; */
+    min-height: 4rem;
+    max-height: 10rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    transform: translateY(-50%);
+    display: none;
+    color: #222;
+    border-radius: 0 0 1rem 1rem;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    /* min-height: 4rem; */
+
+}
+
+.optionsList {
+    padding: 1rem;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.optionsList:hover {
+    background-color: rgb(61, 87, 252, 0.2);
+}
+
+.optionsListSelected {
+    background-color: rgb(61, 87, 252, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.optionActive {
+    transform: translateY(0%);
+    display: block;
+    z-index: 1;
+    /* position: relative; */
+}

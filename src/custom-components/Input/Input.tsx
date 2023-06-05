@@ -1,26 +1,61 @@
-import React, { CSSProperties } from 'react'
-import styles from "./input.module.css"
+import React, { CSSProperties } from "react";
+import styles from "./input.module.css";
 export interface onchangeInputType {
-
     val: string | number;
-    name: string
-
+    name: string;
 }
 interface Input {
     name?: string;
     onChange?: (val: onchangeInputType) => void;
     placeholder?: string;
     disable?: boolean;
-    type?: 'email' | 'password' | 'text';
+    type?: "email" | "password" | "text" | "textarea";
     required?: boolean;
     value?: string;
-    style?: CSSProperties
+    style?: CSSProperties;
 }
-const Input: React.FC<Input> = ({ disable = false, name, onChange, placeholder, type = 'text', required = true, value, style }) => {
+const Input: React.FC<Input> = ({
+    disable = false,
+    name,
+    onChange,
+    placeholder,
+    type = "text",
+    required = true,
+    value,
+    style,
+}) => {
     // console.log(disable, placeholder, type, required)
-    return <div style={disable ? { cursor: "not-allowed", ...style } : style} >
-        <input value={value} required={required} className={`${styles.inputcss} ${disable ? styles.disabled : ''}`} type={type} onChange={(e) => onChange && onChange({ val: e.target.value, name: e.target.name })} disabled={disable} name={name} placeholder={placeholder} />
-    </div>
-}
+    return (
+        <div style={disable ? { cursor: "not-allowed", ...style } : style}>
+            {type !== "textarea" && <input
+                value={value}
+                required={required}
+                className={`${styles.inputcss} ${disable ? styles.disabled : ""}`}
+                type={type}
+                onChange={(e) =>
+                    onChange && onChange({ val: e.target.value, name: e.target.name })
+                }
+                disabled={disable}
+                name={name}
+                placeholder={placeholder}
+            />}
+            {type === "textarea" && (
+                <textarea
+                    style={{ resize: 'none', height: '10rem', padding: '1rem' }}
+                    value={value}
+                    required={required}
+                    className={`${styles.inputcss} ${disable ? styles.disabled : ""}`}
 
-export default Input
+                    onChange={(e) =>
+                        onChange && onChange({ val: e.target.value, name: e.target.name })
+                    }
+                    disabled={disable}
+                    name={name}
+                    placeholder={placeholder}
+                />
+            )}
+        </div>
+    );
+};
+
+export default Input;

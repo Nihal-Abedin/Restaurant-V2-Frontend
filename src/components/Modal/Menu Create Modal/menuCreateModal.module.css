@@ -1,0 +1,20 @@
+.menuForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.menuInputs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem
+}
+
+.menuInputs p {
+    font-size: 1.6rem;
+}
+
+.btnDiv {
+    display: flex;
+    justify-content: center;
+}

@@ -18,7 +18,7 @@ const Restaurantcard: React.FC<PropTypes> = ({ onClick, id, rating, resName, men
     return <Card footer={true} title={`${resName}`} onClick={onClick}>
         <div className={`${styles.restaurantCardContainer}`}>
             <h1>
-                Test Restaurant
+                {resName}
             </h1>
             <div className={styles.cardInfos}>
                 <p>Menus : <span>{menus}</span> </p>

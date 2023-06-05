@@ -7,9 +7,10 @@ interface Card {
     children?: ReactNode
     footer?: boolean
     onClick?: () => void
+    bookmark?: string
 
 }
-const Card: React.FC<Card> = ({ title, children, image, footer, onClick }) => {
+const Card: React.FC<Card> = ({ title, children, image, footer, onClick, bookmark }) => {
     console.log(footer)
     const shortTitelName = title.split(" ");
     const convetName = shortTitelName.map((name) => name[0]).join('')
@@ -21,6 +22,8 @@ const Card: React.FC<Card> = ({ title, children, image, footer, onClick }) => {
                 {convetName}
             </div>
             }
+            {bookmark && <div className={styles.bookmarkRibbon}>{bookmark}</div>}
+
         </div>
         <div className={styles.cardChildren}>
             {children}

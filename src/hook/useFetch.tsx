@@ -15,14 +15,16 @@ interface ReturnTypes {
     refetch?: () => void;
     isLoading?: boolean;
     isSuccess?: boolean;
-    isError?: boolean
+    isError?: boolean;
+    sendReq?: () => void
+
 
 }
 
 
-const useFetch = (URL: string, { isEnable = false, method = 'GET', retry = false, retryDelay = 0 }: optionsType) => {
+const useFetch = (URL: string, { isEnable = true, method = 'GET', retry = false, retryDelay = 0, }: optionsType) => {
     const [returnState, setReturnState] = useState<ReturnTypes>({
-        data: [],
+        data: null,
         error: null,
         refetch: () => {
             // 
@@ -31,8 +33,9 @@ const useFetch = (URL: string, { isEnable = false, method = 'GET', retry = false
         isSuccess: false,
         isError: false
     })
+    // console.log(URL)
     //   const handleModalOpen = useModalStore((state) => state.handleModalOpen);
-    const sendReq = useCallback(async (data?: any) => {
+    const sendReq = async (data?: any) => {
         setReturnState(prev => ({ ...prev, isLoading: true }))
 
         try {
@@ -41,6 +44,7 @@ const useFetch = (URL: string, { isEnable = false, method = 'GET', retry = false
                 url: URL,
                 data: data ? data : null
             })
+            // console.log(resData, "RES DATA")
 
             setReturnState(prev => ({ ...prev, data: resData, isSuccess: true, isError: false, error: null }))
         } catch (err: any) {
@@ -59,11 +63,21 @@ const useFetch = (URL: string, { isEnable = false, method = 'GET', retry = false
             isLoading: false,
         }))
 
-    }, [])
+
+    }
     useEffect(() => {
+        // window.addEventListener("focus", sendReq);
         setReturnState(prev => ({ ...prev, refetch: sendReq }))
 
     }, [])
+    // console.log(isEnable, "IS ENABLE")
+    if (!isEnable) {
+        return {
+            ...returnState, sendReq: () => {
+                // 
+            }
+        }
+    }
     return { ...returnState, sendReq }
 }
 export default useFetch;
