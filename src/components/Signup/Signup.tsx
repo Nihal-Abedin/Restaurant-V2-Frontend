@@ -21,7 +21,7 @@ const Signup: React.FC = () => {
         setFormData(prev => ({ ...prev, [val.name]: val.val }))
     }
     console.log(formData)
-    return <Layout>
+    return <>
         <div className={styles.formContainer}>
             <form className={styles.loginForm}>
                 <div>
@@ -61,7 +61,7 @@ const Signup: React.FC = () => {
                 <Button type="primary" htmlType="submit" text=' Sign Up' />
             </form>
         </div>
-    </Layout>
+    </>
 }
 
 export default Signup;

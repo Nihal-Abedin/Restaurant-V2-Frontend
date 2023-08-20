@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import instance from "../utils/axiosIntance";
 import useLogin from "../store/useLoginState";
+import { toast } from "react-hot-toast";
 
 interface optionsType {
     isEnable?: boolean;
@@ -11,7 +12,7 @@ interface optionsType {
 }
 interface ReturnTypes {
     data: [] | any;
-    error?: string | object | null;
+    error?: string | null;
     refetch?: () => void;
     isLoading?: boolean;
     isSuccess?: boolean;
@@ -44,11 +45,12 @@ const useFetch = (URL: string, { isEnable = true, method = 'GET', retry = false,
                 url: URL,
                 data: data ? data : null
             })
-            // console.log(resData, "RES DATA")
+            // toast.success(resData.message)
 
             setReturnState(prev => ({ ...prev, data: resData, isSuccess: true, isError: false, error: null }))
         } catch (err: any) {
             console.log(err)
+            toast.error(err.message)
             // console.log(err.response.data, "SADAS")
             setReturnState(prev => ({
                 ...prev,

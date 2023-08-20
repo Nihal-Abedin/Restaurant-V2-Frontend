@@ -59,9 +59,9 @@ const RestaurantDetails: React.FC = () => {
     }, [data]);
     if (isLoading || !data || !resData.name) {
         return (
-            <Layout>
+            <>
                 <Spin />
-            </Layout>
+            </>
         );
     }
     return (
@@ -70,7 +70,6 @@ const RestaurantDetails: React.FC = () => {
             name={resData.name}
             total_count={resData.menus?.length}
             onClick={handleOpenModal}
-            onCloseModal={() => handleModal({ menuCreateModal: false })}
             refetchAfterAction={sendReq}
             rating={resData.rating}
         >

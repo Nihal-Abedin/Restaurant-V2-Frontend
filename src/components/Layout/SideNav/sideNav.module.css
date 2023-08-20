@@ -1,5 +1,6 @@
 .sidNavContainer {
     background-color: #141414;
     border-right: 1px solid rgb(0, 0, 161, 0.2);
-    height: calc(100vh - 7rem);
+    /* height: calc(100vh - 7rem); */
+    grid-template-rows: 1 / -1;
 }

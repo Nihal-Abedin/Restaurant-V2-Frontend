@@ -19,7 +19,10 @@ const instance: AxiosInstance = axios.create({
 instance.interceptors.request.use((config) => {
 
     const token = getToken()
-    config.headers['Authorization'] = `Bearer ${token}`;
+    if (token) {
+
+        config.headers['Authorization'] = `Bearer ${token}`;
+    }
 
     return config;
 }, (error: AxiosError) => {

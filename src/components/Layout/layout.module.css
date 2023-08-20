@@ -1,6 +1,8 @@
 .layoutcontainer {
+    height: 100vh;
     display: grid;
     grid-template-columns: 25rem 1fr;
+    grid-template-rows:  7rem 1fr;
 }
 
 .childrenContainer {
@@ -9,7 +11,7 @@
     /* justify-items: center; */
     align-items: center;
 
-    height: calc(100vh - 7rem);
+    /* height: calc(100vh - 7rem); */
     padding: 4rem 2rem 0 2rem;
     background: radial-gradient(42.04% 42.04% at 50% 3.99%, rgb(0, 0, 161, 0.6) 0%, #141414 100%);
     overflow-y: scroll;

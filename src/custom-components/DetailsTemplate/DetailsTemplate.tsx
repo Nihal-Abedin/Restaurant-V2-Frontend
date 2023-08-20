@@ -18,7 +18,6 @@ interface templateTypes {
     total_count?: number;
     header_Title?: string;
     rating?: number;
-    onCloseModal?: () => void;
     refetchAfterAction?: () => void;
     bookmark?: string;
     tag?: {
@@ -34,27 +33,31 @@ const DetailsTemplate: React.FC<templateTypes> = ({
     onClick,
     total_count,
     header_Title,
-    onCloseModal,
     refetchAfterAction,
     rating = 0,
     bookmark,
     tag
 }) => {
     const modalname = useModalStore((state) => state.modalName);
+    const handleModal = useModalStore((state) => state.openModal);
 
     return (
         <Layout>
             {modalname && modalname?.menuCreateModal && (
                 <CreateMenuModal
                     visible={modalname?.menuCreateModal}
-                    onClose={onCloseModal}
+                    onClose={() => {
+                        handleModal({ menuCreateModal: false });
+                    }}
                     onRefetch={refetchAfterAction}
                 />
             )}
             {modalname && modalname?.reviewModal && (
                 <ReviewModal
                     visible={modalname?.reviewModal}
-                    onClose={onCloseModal}
+                    onClose={() => {
+                        handleModal({ reviewModal: false });
+                    }}
                     onRefetch={refetchAfterAction}
                 />
             )}
@@ -83,12 +86,12 @@ const DetailsTemplate: React.FC<templateTypes> = ({
                 <div className={styles.detialsContent}>
                     <div className={styles.detailsHeader}>
                         <h1>
-                            {header_Title} ({total_count}) / ({rating}){" "}
+                            {header_Title} ({total_count}) / ({rating.toFixed(2)}){" "}
                             <ReviewStars rating={rating} />
                         </h1>
 
                         <Button onClick={onClick} type="primary">
-                            <PlusOutlined /> Create
+                            <PlusOutlined /> Create {header_Title}
                         </Button>
                     </div>
                 </div>

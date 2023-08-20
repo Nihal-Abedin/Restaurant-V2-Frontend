@@ -4,7 +4,7 @@ export interface onchangeInputType {
     val: string | number;
     name: string;
 }
-interface Input {
+interface InputProps {
     name?: string;
     onChange?: (val: onchangeInputType) => void;
     placeholder?: string;
@@ -13,8 +13,9 @@ interface Input {
     required?: boolean;
     value?: string;
     style?: CSSProperties;
+    defaultValue?: string;
 }
-const Input: React.FC<Input> = ({
+const Input: React.FC<InputProps> = ({
     disable = false,
     name,
     onChange,
@@ -23,6 +24,7 @@ const Input: React.FC<Input> = ({
     required = true,
     value,
     style,
+    defaultValue
 }) => {
     // console.log(disable, placeholder, type, required)
     return (
@@ -36,6 +38,7 @@ const Input: React.FC<Input> = ({
                     onChange && onChange({ val: e.target.value, name: e.target.name })
                 }
                 disabled={disable}
+                defaultValue={defaultValue}
                 name={name}
                 placeholder={placeholder}
             />}
@@ -50,6 +53,7 @@ const Input: React.FC<Input> = ({
                         onChange && onChange({ val: e.target.value, name: e.target.name })
                     }
                     disabled={disable}
+                    defaultValue={defaultValue}
                     name={name}
                     placeholder={placeholder}
                 />

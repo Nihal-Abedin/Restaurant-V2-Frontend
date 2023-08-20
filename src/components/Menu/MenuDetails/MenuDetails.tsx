@@ -7,6 +7,8 @@ import useFetch from "../../../hook/useFetch";
 import Layout from "../../Layout/Layout";
 import Spin from "../../../custom-components/Spin/Spin";
 import ReviewList from "../../Review/ReviewList/ReviewList";
+import ReviewModal from "../../Modal/Review Modal/ReviewModal";
+import ReviewUpdateModal from "../../Modal/Review Update Modal/ReviewUpdateModal";
 interface resData {
     name?: string;
     shortName?: string;
@@ -26,6 +28,8 @@ interface resData {
 const MenuDetails: React.FC = () => {
     const { menuId } = useParams();
     const handleModal = useModalStore((state) => state.openModal);
+    const modalname = useModalStore((state) => state.modalName);
+
     const [resData, setResData] = useState<resData>({
         name: "",
         reviews: [],
@@ -39,13 +43,17 @@ const MenuDetails: React.FC = () => {
             name: "", id: ""
         }
     });
+    const [reviewEditData, stReviewEditData] = useState({
+        review: '',
+        rating: 0,
+        id: ''
+    })
     const { data, sendReq, error, isLoading } = useFetch(
         `${import.meta.env.VITE_REACT_APP_BASE_URL}/menu/${menuId}`,
         {
             method: "GET",
         }
     );
-    console.log(data)
     const handleOpenModal = () => {
         handleModal({ reviewModal: true });
     };
@@ -53,7 +61,7 @@ const MenuDetails: React.FC = () => {
     useEffect(() => {
         sendReq();
     }, []);
-
+    console.log(reviewEditData)
     useEffect(() => {
         if (!data) {
             return;
@@ -79,9 +87,9 @@ const MenuDetails: React.FC = () => {
     }, [data]);
     if (isLoading || !data || !resData.name) {
         return (
-            <Layout>
+            <>
                 <Spin />
-            </Layout>
+            </>
         );
     }
     return (
@@ -90,14 +98,23 @@ const MenuDetails: React.FC = () => {
             name={resData.name}
             onClick={handleOpenModal}
             total_count={resData.total_reviews}
-            onCloseModal={() => {
-                handleModal({ reviewModal: false });
-            }}
             refetchAfterAction={sendReq}
             rating={resData.rating}
             bookmark={resData.category?.name}
             tag={resData.restaurant}
         >
+            {modalname && modalname?.updateReviewModal && (
+                <ReviewUpdateModal
+                    visible={modalname?.updateReviewModal}
+                    onClose={() => {
+                        handleModal({ updateReviewModal: false });
+                    }}
+                    review={reviewEditData.review}
+                    rating={reviewEditData.rating}
+                    onRefetch={sendReq}
+                    id={reviewEditData.id}
+                />
+            )}
             {resData.reviews?.length === 0 && (
                 <p style={{ fontSize: "3rem", textAlign: "center" }}>
                     Add some review to this menu.
@@ -113,6 +130,7 @@ const MenuDetails: React.FC = () => {
                         review={rev.review}
                         userName={rev.user.name}
                         image={rev.user.image}
+                        onsetReviewData={stReviewEditData}
                     />
                 ))}
             </div>

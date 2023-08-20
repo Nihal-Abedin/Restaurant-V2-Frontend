@@ -22,7 +22,7 @@ const Restaurantcard: React.FC<PropTypes> = ({ onClick, id, rating, resName, men
             </h1>
             <div className={styles.cardInfos}>
                 <p>Menus : <span>{menus}</span> </p>
-                <p>Rating : <span>{rating}</span> </p>
+                <p>Rating : <span>{rating?.toFixed(2)}</span> </p>
 
             </div>
 

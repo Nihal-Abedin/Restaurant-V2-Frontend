@@ -13,6 +13,7 @@ interface Input {
     max?: number;
     min?: number;
     step?: number;
+    defaultValue?: number
 }
 const NumberInput: React.FC<Input> = ({
     disable,
@@ -23,8 +24,9 @@ const NumberInput: React.FC<Input> = ({
     max = 5,
     min = 1,
     step = 0.5,
+    defaultValue = 1
 }) => {
-    const [value, setvalue] = useState(1);
+    const [value, setvalue] = useState(defaultValue);
     const [finalDate, setFinalData] = useState({
         name: name,
         val: value,
@@ -76,6 +78,7 @@ const NumberInput: React.FC<Input> = ({
                         setvalue(+e.target.value)
                     }
                     }
+                    // defaultValue={value}
                     value={value}
                     min={1}
                     max={5}

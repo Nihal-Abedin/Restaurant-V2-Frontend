@@ -20,10 +20,9 @@ const Login: React.FC = () => {
     })
     const { data, sendReq, error, isLoading, isError, isSuccess } = useFetch(`${import.meta.env.VITE_REACT_APP_BASE_URL}/user/login/`,
         {
-            method: 'POST'
+            method: 'POST',
         })
     console.log(error, "ERRRRRRRRRRRRRRRROOOOOOOOOOR")
-    console.log(data, isLoading, "LOADING", isSuccess, "IS SUCCESS", isError, "ERROR")
     const handleFormData = (val: onchangeInputType) => {
         setFormData(prev => ({ ...prev, [val.name]: val.val }))
     }
@@ -34,22 +33,22 @@ const Login: React.FC = () => {
     }
     useEffect(() => {
         if (isSuccess) {
-            Cookies.set("JWT_TOKEN", data.token, { path: '/' })
+            Cookies.set("JWT_TOKEN", data.token, { path: '/', expires: new Date(new Date().getTime() + 60 * 60 * 1000) })
             setLogin(true)
             navigate('/restaurant')
         }
-    }, [isSuccess])
+    }, [data, isSuccess, navigate, setLogin])
 
     if (isLogin) {
-        return <Layout>
+        return <>
             <h1>You are already Logged in.</h1>
             <Button style={{ marginTop: '1rem' }} type='primary' onClick={() => {
                 Cookies.remove("JWT_TOKEN")
                 setLogin(false)
             }} text="Logout" />
-        </Layout>
+        </>
     }
-    return <Layout>
+    return <>
         <div className={styles.formContainer}>
             <form onSubmit={handleSubmit} className={styles.loginForm}>
                 <div>
@@ -72,6 +71,6 @@ const Login: React.FC = () => {
                 </Button>
             </form>
         </div>
-    </Layout>
+    </>
 }
 export default Login

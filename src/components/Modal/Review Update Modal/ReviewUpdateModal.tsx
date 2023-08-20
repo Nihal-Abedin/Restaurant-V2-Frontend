@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from "./reviewMoal.module.css";
+import styles from "../Review Modal/reviewMoal.module.css";
 import Modal from '../../../custom-components/Modal Temp/Modal';
 import Button from '../../../custom-components/Button/Button';
 import Input, { onchangeInputType } from '../../../custom-components/Input/Input';
@@ -9,18 +9,22 @@ import { useParams } from 'react-router';
 interface modalType {
     visible?: boolean;
     onClose?: () => void;
-    onRefetch?: () => void
+    onRefetch?: () => void;
+    review?: string;
+    rating?: number;
+    id?: string
 }
 
-const ReviewModal: React.FC<modalType> = ({ onClose, onRefetch, visible }) => {
+const ReviewUpdateModal: React.FC<modalType> = ({ onClose, onRefetch, visible, review = '', rating = 0, id }) => {
     const { menuId } = useParams()
+    const [btnDisable, setBtnDisable] = useState(true);
     const [formData, setFormData] = useState({
-        review: '',
-        rating: ''
+        review: review,
+        rating: rating
     });
 
-    const { sendReq, isError, isSuccess, isLoading } = useFetch(`${import.meta.env.VITE_REACT_APP_BASE_URL}/menu/${menuId}/review`, {
-        method: 'POST'
+    const { sendReq, isError, isSuccess, isLoading } = useFetch(`${import.meta.env.VITE_REACT_APP_BASE_URL}/review/${id}`, {
+        method: 'PATCH'
     })
     const handleInputChange = (val: onchangeInputType | { name: string, val: string | number }) => {
 
@@ -31,6 +35,7 @@ const ReviewModal: React.FC<modalType> = ({ onClose, onRefetch, visible }) => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        console.log(id)
         sendReq(formData)
 
     }
@@ -40,22 +45,30 @@ const ReviewModal: React.FC<modalType> = ({ onClose, onRefetch, visible }) => {
             onRefetch && onRefetch()
         }
     }, [isSuccess])
+    useEffect(() => {
+        if (formData.review !== review || formData.rating !== rating) {
+            setBtnDisable(false)
+        }
+        else {
+            setBtnDisable(true)
+        }
+    }, [formData.review, formData.rating])
     return <Modal visible={visible} onClose={onClose} title='Create Menu'>
         <form onSubmit={handleSubmit} className={styles.menuForm}>
 
             <div className={styles.menuInputs}>
                 <h1>Review</h1>
-                <Input type='textarea' name='review' placeholder='Excellent' onChange={handleInputChange} required />
+                <Input type='textarea' name='review' defaultValue={review} placeholder='Excellent' onChange={handleInputChange} required />
             </div>
             <div className={styles.menuInputs}>
                 <h1>Rating</h1>
-                <NumberInput name='rating' onChange={handleInputChange} />
+                <NumberInput name='rating' defaultValue={rating} onChange={handleInputChange} />
             </div>
 
             <div className={styles.btnDiv}>
-                <Button type='primary' htmlType='submit' isLoading={isLoading}>Submit</Button>
+                <Button type='primary' htmlType='submit' isLoading={isLoading} disable={btnDisable}>Update</Button>
             </div>
         </form>
     </Modal>
 }
-export default ReviewModal;
+export default ReviewUpdateModal;

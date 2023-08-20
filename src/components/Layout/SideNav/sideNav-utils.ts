@@ -1,65 +1,99 @@
-import { ReactNode } from "react"
-import { UserOutlined, LockOutlined, HomeOutlined, ReadOutlined } from "@ant-design/icons";
-import Cookies from "js-cookie";
-
+import { ReactNode } from "react";
+import {
+  UserOutlined,
+  LockOutlined,
+  HomeOutlined,
+  ReadOutlined,
+} from "@ant-design/icons";
 
 export interface itemsObject {
-    key: string,
-    lable: string | ReactNode,
-    icon?: typeof LockOutlined | null,
-    child?: itemsArray,
-    disable?: boolean,
-    onClick?: () => void
-
+  key: string;
+  lable: string | ReactNode;
+  icon?: typeof LockOutlined | null;
+  child?: itemsArray;
+  disable?: boolean;
+  onClick?: () => void;
 }
 export type itemsArray = itemsObject[];
 
 export const items: itemsArray = [
-    {
-        key: "authentication",
-        lable: "Authentication",
+  {
+    key: "authentication",
+    lable: "Authentication",
+    child: [
+      {
+        key: "login",
+        lable: "Login",
+      },
+      {
+        key: "signup",
+        lable: "Signup",
+      },
+    ],
+    icon: LockOutlined,
+    disable: false,
+  },
+  {
+    key: "user",
+    lable: "User",
+    icon: UserOutlined,
+    child: [
+      {
+        key: "all-users",
+        lable: "All Users",
         child: [
-            {
-                key: "login",
-                lable: "Login",
-
-            },
-            {
-                key: "signup",
-                lable: "Signup",
-            }
+          {
+            key: "all-users1",
+            lable: "All Users 1",
+          },
+          {
+            key: "all-users2",
+            lable: "All Users 2",
+          },
         ],
-        icon: LockOutlined,
-        disable: false
-    },
-    {
-        key: 'user',
-        lable: 'User',
-        icon: UserOutlined,
-    },
-    {
-        key: 'restaurants',
-        lable: 'Restaurants',
+      },
+      {
+        key: "update-user",
+        lable: "Update user",
         child: [
-            {
-                key: 'restaurant',
-                lable: 'All Restaurant'
-            }
+          {
+            key: "update-user1",
+            lable: "Update user 1",
+          },
+          {
+            key: "update-user2",
+            lable: "Update user 2",
+          },
         ],
-        icon: HomeOutlined
-    },
-    {
-        key: 'allmenu',
-        lable: 'Menu',
-        icon: ReadOutlined,
+      }
+    ],
+  },
+  {
+    key: "restaurants",
+    lable: "Restaurants",
+    child: [
+      {
+        key: "restaurant",
+        lable: "All Restaurant",
+      },
+    ],
+    icon: HomeOutlined,
+  },
+  {
+    key: "allmenu",
+    lable: "Menu",
+    icon: ReadOutlined,
+    child: [
+      {
+        key: "menu",
+        lable: "All Menu",
         child: [
-            {
-                key: 'menu',
-                lable: "All Menu",
-
-            }
-        ]
-
-    }
-
-]
+          {
+            key: "menuSub",
+            lable: "Menu SUB",
+          },
+        ],
+      },
+    ],
+  }
+];

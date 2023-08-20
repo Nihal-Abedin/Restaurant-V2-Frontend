@@ -22,17 +22,17 @@ const RestaurantMenu: React.FC = () => {
         // console.log(`/menu/${id}`)
     }
     if (isLoading || !data) {
-        return <Layout>
+        return <>
             <Spin />
-        </Layout>
+        </>
     }
 
-    return <Layout>
+    return <>
         <div className={styles.menusContainer}>
 
             {data.data.menu.map((m: any) => <MenuCard key={m.id} rating={m.average_ratings} category={m.category.name} menuName={m.name} menu_items={m.menu_items} res={m.restaurant} total_items={m.total_items} total_reviews={m.total_reviews} onClick={handleMenuClick.bind(this, m.id)} />)}
 
         </div>
-    </Layout>
+    </>
 }
 export default RestaurantMenu;
